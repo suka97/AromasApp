@@ -1,14 +1,75 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+
+  <ion-item>
+    <ion-label>URL:</ion-label>
+    <ion-input type="number" placeholder="{{url}}" [(ngModel)]="url"></ion-input>
+  </ion-item>
+  <ion-button #connectBtn color="danger" expand="block" (click)="connect()">
+    Conectar
+  </ion-button>
+
+  <!----------------------- CARDS ------------------------------->
+
+  <ion-card #card_0 color="light">
+    <ion-card-header>
+      <ion-card-title>Aroma 0</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>    
+      <ion-button expand="block" (click)="clicked(0)">
+        Boton
+      </ion-button>
+      <ion-item>
+        <ion-label>Tiempo</ion-label>
+        <ion-datetime displayFormat="ss" placeholder="Tap here" [(ngModel)]="time[0]"></ion-datetime>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card #card_1 color="light">
+    <ion-card-header>
+      <ion-card-title>Aroma 1</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>    
+      <ion-button expand="block" (click)="clicked(1)">
+        Boton
+      </ion-button>
+      <ion-item>
+        <ion-label>Tiempo</ion-label>
+        <ion-datetime displayFormat="ss" placeholder="Tap here" [(ngModel)]="time[1]"></ion-datetime>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card #card_2 color="light">
+    <ion-card-header>
+      <ion-card-title>Aroma 2</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>    
+      <ion-button expand="block" (click)="clicked(2)">
+        Boton
+      </ion-button>
+      <ion-item>
+        <ion-label>Tiempo</ion-label>
+        <ion-datetime displayFormat="ss" placeholder="Tap here" [(ngModel)]="time[2]"></ion-datetime>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card #card_3 color="light">
+    <ion-card-header>
+      <ion-card-title>Aroma 3</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>    
+      <ion-button expand="block" (click)="clicked(3)">
+        Boton
+      </ion-button>
+      <ion-item>
+        <ion-label>Tiempo</ion-label>
+        <ion-datetime displayFormat="ss" placeholder="Tap here" [(ngModel)]="time[3]"></ion-datetime>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- ------------------------------------------------------------ -->
+
 </ion-content>
