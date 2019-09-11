@@ -1,7 +1,6 @@
 import { Component, ViewChild, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { IonCard, IonButton, ToastController  } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-home',
