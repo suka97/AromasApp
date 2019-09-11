@@ -2,7 +2,11 @@
 
   <ion-item>
     <ion-label>URL:</ion-label>
-    <ion-input type="number" placeholder="{{url}}" [(ngModel)]="url"></ion-input>
+    <ion-input type="url" placeholder="{{url}}" [(ngModel)]="url"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>PORT:</ion-label>
+    <ion-input type="number" placeholder="{{port}}" [(ngModel)]="port"></ion-input>
   </ion-item>
   <ion-button #connectBtn color="danger" expand="block" (click)="connect()">
     Conectar
@@ -12,60 +16,80 @@
 
   <ion-card #card_0 color="light">
     <ion-card-header>
-      <ion-card-title>Aroma 0</ion-card-title>
+      <ion-card-title>
+        <ion-item>
+          <ion-label>Aroma:</ion-label>
+          <ion-input type="text" placeholder="nombre" [(ngModel)]="nombreAroma[0]"></ion-input>
+        </ion-item>
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>    
       <ion-button expand="block" (click)="clicked(0)">
-        Boton
+        Aplicar
       </ion-button>
       <ion-item>
         <ion-label>Tiempo</ion-label>
-        <ion-datetime displayFormat="ss" placeholder="Tap here" [(ngModel)]="time[0]"></ion-datetime>
+        <ion-input type="number" placeholder="{{time[0]}}" [(ngModel)]="time[0]"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>
 
   <ion-card #card_1 color="light">
     <ion-card-header>
-      <ion-card-title>Aroma 1</ion-card-title>
+      <ion-card-title>
+        <ion-item>
+          <ion-label>Aroma:</ion-label>
+          <ion-input type="text" placeholder="nombre" [(ngModel)]="nombreAroma[1]"></ion-input>
+        </ion-item>
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>    
       <ion-button expand="block" (click)="clicked(1)">
-        Boton
+        Aplicar
       </ion-button>
       <ion-item>
         <ion-label>Tiempo</ion-label>
-        <ion-datetime displayFormat="ss" placeholder="Tap here" [(ngModel)]="time[1]"></ion-datetime>
+        <ion-input type="number" placeholder="{{time[1]}}" [(ngModel)]="time[1]"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>
 
   <ion-card #card_2 color="light">
     <ion-card-header>
-      <ion-card-title>Aroma 2</ion-card-title>
+      <ion-card-title>
+        <ion-item>
+          <ion-label>Aroma:</ion-label>
+          <ion-input type="text" placeholder="nombre" [(ngModel)]="nombreAroma[2]"></ion-input>
+        </ion-item>
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>    
       <ion-button expand="block" (click)="clicked(2)">
-        Boton
+        Aplicar
       </ion-button>
       <ion-item>
         <ion-label>Tiempo</ion-label>
-        <ion-datetime displayFormat="ss" placeholder="Tap here" [(ngModel)]="time[2]"></ion-datetime>
+        <ion-input type="number" placeholder="{{time[2]}}" [(ngModel)]="time[2]"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>
 
   <ion-card #card_3 color="light">
     <ion-card-header>
-      <ion-card-title>Aroma 3</ion-card-title>
+      <ion-card-title>
+        <ion-item>
+          <ion-label>Aroma:</ion-label>
+          <ion-input type="text" placeholder="nombre" [(ngModel)]="nombreAroma[3]"></ion-input>
+        </ion-item>
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>    
       <ion-button expand="block" (click)="clicked(3)">
-        Boton
+        Aplicar
       </ion-button>
       <ion-item>
         <ion-label>Tiempo</ion-label>
-        <ion-datetime displayFormat="ss" placeholder="Tap here" [(ngModel)]="time[3]"></ion-datetime>
+        <ion-input type="number" placeholder="{{time[3]}}" [(ngModel)]="time[3]"></ion-input>
       </ion-item>
     </ion-card-content>
   </ion-card>
