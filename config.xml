@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ingia.proyectos.aromasapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>AromasApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
+    <description>Android App para controlar proyecto "Experiencia Aromas"</description>
     <author email="proyectos.ingia@gmail.com" href="https://ingia.com.ar/">Andres Sukanec</author>
     <content src="index.html" />
     <access origin="*" />
