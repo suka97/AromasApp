@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { IonicStorageModule } from "@ionic/storage";
 
 import { HomePage } from './home.page';
+import {DeviceCardComponent} from '../../app/device-card/device-card.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { HomePage } from './home.page';
       }
     ])
   ],
-  declarations: [HomePage]
+  entryComponents: [DeviceCardComponent],
+  declarations: [HomePage, DeviceCardComponent]
 })
 export class HomePageModule {}

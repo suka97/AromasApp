@@ -2,6 +2,7 @@ import { Component, ViewChild, AfterViewInit, ViewChildren, QueryList } from '@a
 import { IonCard, IonButton, ToastController, LoadingController   } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import { TimeInterval } from 'rxjs';
+import {DeviceCardComponent} from '../../app/device-card/device-card.component';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,8 @@ import { TimeInterval } from 'rxjs';
 })
 export class HomePage {
 
-  constructor(private storage: Storage, public toastController: ToastController, public loadingController: LoadingController) {}
+  constructor(private storage: Storage, public toastController: ToastController, 
+      public loadingController: LoadingController) {}
 
   @ViewChildren(IonCard) cards !: QueryList<IonCard>
   @ViewChild('card_0', {static: false}) card !: IonCard
@@ -24,6 +26,7 @@ export class HomePage {
   connected: boolean = false;
   checkConnectionLoop: any;
   isLoading: boolean = false;
+  inputRowValue = [{}]
 
   ngAfterViewInit() {
     this.getDefaults().then(_=> {  });
@@ -34,6 +37,14 @@ export class HomePage {
         console.log("check");
       }
     }, 1000);
+
+    // creo las instancias de los dispositivos conectados
+    for ( let i=0 ; i<3 ; i++ ) 
+      this.addRow();
+  }
+
+  addRow() {
+    this.inputRowValue.push({})
   }
 
   getDefaults() {

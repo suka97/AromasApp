@@ -14,8 +14,22 @@
     Conectar
   </ion-button>
 
-  <!----------------------- CARDS ------------------------------->
+  <!--
+  <ion-picker-controller></ion-picker-controller>
+  -->
+  <ion-list>
+    <div *ngFor="let i of inputRowValue; let ii=index"  style="font-size:smaller">
+      <app-device-card></app-device-card>
+      <!--
+      <app-input-row [data]="i" (onDelete)="onDelete($event)"></app-input-row>
+      -->
+    </div>
+  </ion-list>
+  
 
+
+  <!----------------------- CARDS ------------------------------->
+  <!--
   <ion-card #card_0 color="light">
     <ion-card-header>
       <ion-card-title>
@@ -95,7 +109,7 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-
+  -->
   <!-- ------------------------------------------------------------ -->
 
 </ion-content>
