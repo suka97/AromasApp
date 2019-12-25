@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Añadir Dispositivo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>Direccion IP</ion-list-header>
+    <ion-item>
+      <ion-input type="number" placeholder="Ingrese la Direccion IP" [(ngModel)]="urlDevice"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>Nombre Aromas</ion-list-header>
+    <ion-item>
+      <ion-input type="text" placeholder="Ingrese un nombre" [(ngModel)]="nombreAroma[0]"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Ingrese un nombre" [(ngModel)]="nombreAroma[1]"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Ingrese un nombre" [(ngModel)]="nombreAroma[2]"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder="Ingrese un nombre" [(ngModel)]="nombreAroma[3]"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button color="success" expand="block" (click)="addDevice()">
+    AGREGAR
+  </ion-button>
+</ion-content>

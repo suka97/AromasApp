@@ -1,86 +1,19 @@
 <ion-card>
   <ion-card-content>
     <ion-grid>
-      <!-- COL 0 -->
-      <ion-row nowrap>
-        <ion-col></ion-col>
+
+      <ion-row nowrap *ngFor="let rowNumber of rows">
         <ion-col>
           <ion-item>
-            <ion-checkbox></ion-checkbox>
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-label>{{nombresAromas[rowNumber]}}</ion-label>
           </ion-item>
         </ion-col>
         <ion-col>
-            <ion-item>
-                <ion-label>Aroma</ion-label>
-            </ion-item>
-          </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-input type="number" placeholder="{{time[0]}}" [(ngModel)]="time[0]"></ion-input>
-          </ion-item>
+          <ion-input type="number" placeholder="{{times[rowNumber]}}" [(ngModel)]="times[rowNumber]"></ion-input>
         </ion-col>
       </ion-row>
-      <!-- COL 1 -->
-      <ion-row nowrap>
-          <ion-col>
-            <ion-item>
-                <ion-label>Maquina</ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-checkbox></ion-checkbox>
-            </ion-item>
-          </ion-col>
-          <ion-col>
-              <ion-item>
-                  <ion-label>Aroma</ion-label>
-              </ion-item>
-            </ion-col>
-          <ion-col>
-            <ion-item>
-              <ion-input type="number" placeholder="{{time[1]}}" [(ngModel)]="time[1]"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <!-- COL 2 -->
-        <ion-row nowrap>
-            <ion-col></ion-col>
-            <ion-col>
-              <ion-item>
-                <ion-checkbox></ion-checkbox>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-                <ion-item>
-                    <ion-label>Aroma</ion-label>
-                </ion-item>
-              </ion-col>
-            <ion-col>
-              <ion-item>
-                <ion-input type="number" placeholder="{{time[2]}}" [(ngModel)]="time[2]"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <!-- COL 3 -->
-          <ion-row nowrap>
-              <ion-col></ion-col>
-              <ion-col>
-                <ion-item>
-                  <ion-checkbox></ion-checkbox>
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                  <ion-item>
-                      <ion-label>Aroma</ion-label>
-                  </ion-item>
-                </ion-col>
-              <ion-col>
-                <ion-item>
-                  <ion-input type="number" placeholder="{{time[3]}}" [(ngModel)]="time[3]"></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
+
     </ion-grid>
   </ion-card-content>
 </ion-card>
