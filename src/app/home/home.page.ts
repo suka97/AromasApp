@@ -1,9 +1,10 @@
 import { Component, ViewChild, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
-import { IonCard, IonButton, ToastController, LoadingController, NavController } from "@ionic/angular";
+import { IonCard, IonButton, ToastController, LoadingController, NavController, Events } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 import { TimeInterval } from 'rxjs';
 import { DeviceCardComponent } from '../../app/device-card/device-card.component';
 import { setIndex } from '@ionic-native/core/decorators/common';
+import { DeviceType } from '../device.type'
 
 import { ConnectPage } from '../connect/connect.page';
 
@@ -14,39 +15,51 @@ import { ConnectPage } from '../connect/connect.page';
 })
 export class HomePage implements AfterViewInit {
 
-  constructor(private storage: Storage, public toastController: ToastController, 
+  constructor(private storage: Storage, public toastController: ToastController, private events: Events, 
       public loadingController: LoadingController, public navCtrl: NavController) {   }
 
-  @ViewChildren(IonCard) cards !: QueryList<IonCard>
-  @ViewChild('card_0', {static: false}) card !: IonCard
-  @ViewChild('connectBtn', {static: false}) connectBtn !: IonButton
   @ViewChildren(DeviceCardComponent) devicesArray !: QueryList<DeviceCardComponent>
-
-  urlDevices: string[] = ["192.168.1.1"];  //"localhost";  //"192.168.1.128";
-  deviceIDs: number[] = [0];
+  indexes: number[];
+  devices: DeviceType[];
+  connected: boolean = false;
+  connectBtn_text: string = "CONECTAR";
+  connectBtn_color: string = "primary";
 
   ngAfterViewInit() {
-    this.getURLs().then(_=> {  });
+    this.events.subscribe("settings-event", (values)=>{
+      //console.log("settings-event");
+      this.getDevices();
+    });
+    this.getDevices().then(_=> {  });
   }
 
-  getURLs() {
+  getDevices() {
     return Promise.all([
-      this.storage.get("urlDevices")
+      this.storage.get("devices")
     ]).then(values => {
-      //console.log(values);
-      if ( values[0] != null ) {
-        this.urlDevices = values[0];
-        console.log(this.urlDevices);
-
-        // agrego los dispositivos y actualizo las URLs
-        while ( this.urlDevices.length > this.deviceIDs.length )
-          this.deviceIDs.push( this.deviceIDs[this.deviceIDs.length-1] + 1 );
-      }
+      this.devices = values[0];
+      if ( this.devices != null )
+        this.indexes = Array.from(Array(this.devices.length).keys());
     });
   }
 
   connect() { 
-    //this.navCtrl.navigateForward("connect");
+    console.log("connect");
+    this.devicesArray.forEach( device=> {
+      device.connect();
+    });
+    this.connected = !this.connected;
+    if ( this.connected ) {
+      this.connectBtn_text = "DESCONECTAR";
+      this.connectBtn_color = "danger"
+    }
+    else {
+      this.connectBtn_text = "CONECTAR";
+      this.connectBtn_color = "primary"
+    }
+  }
+
+  settings() {
     this.navCtrl.navigateForward("settings");
   }
 
@@ -81,8 +94,7 @@ export class HomePage implements AfterViewInit {
 
   send() {
     this.devicesArray.forEach( device=> {
-      console.log("hola");
-      console.log(device.id);
+      device.send();
     });
   }
 

@@ -1,19 +1,20 @@
 <ion-content>
 
-  <ion-button #connectBtn color="danger" expand="block" (click)="connect()">
-    Conectar
+  <ion-button color="warning" expand="block" (click)="settings()">
+    Ajustes
   </ion-button>
 
-  <ion-button #sendBtn color="success" expand="block" (click)="send()">
+  <ion-button #connectBtn color="{{connectBtn_color}}" expand="block" (click)="connect()">
+    {{connectBtn_text}}
+  </ion-button>
+
+  <ion-button color="success" expand="block" (click)="send()" disabled="{{!connected}}">
     Enviar
   </ion-button>
 
   <ion-list>
-    <div *ngFor="let id of deviceIDs"  style="font-size:smaller">
-      <app-device-card [id]="id" [urlDevices]="urlDevices"></app-device-card>
-      <!--
-      <app-input-row [id]="i" (onDelete)="onDelete($event)"></app-input-row>
-      -->
+    <div *ngFor="let ngFor_index of indexes"  style="font-size:smaller">
+      <app-device-card [device]="devices[ngFor_index]"></app-device-card>
     </div>
   </ion-list>
   

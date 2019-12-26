@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, AfterViewInit } from '@angular/core';
-import { Storage } from "@ionic/storage";
+import { DeviceType } from '../device.type';
 
 @Component({
   selector: 'app-device-card',
@@ -8,35 +8,24 @@ import { Storage } from "@ionic/storage";
 })
 export class DeviceCardComponent implements AfterViewInit {
 
-  constructor(private storage: Storage) { }
+  constructor() { }
 
-  @Input() id: number
-  @Input() urlDevices: string[]
+  @Input() device: DeviceType
   //@Output() onDelete = new EventEmitter<any>();
 
-  port: string = "80";
-  times: string[] = ["500", "1000", "1500", "2000"];
-  nombresAromas: string[] = ["Aroma1", "Aroma2", "Aroma3", "Aroma4"];
   rows: number[] = [0, 1, 2, 3];
+  times: string[] = ["500", "500", "500", "500"];
+  connected: boolean = false;
 
   ngAfterViewInit() {
-    this.getDefaults();
   }
 
-  getSendData() {
-
+  connect() {
+    this.connected = !this.connected;
   }
 
-  getDefaults() {
-    return Promise.all([
-      this.storage.get( this.id + "nombresAromas" ),
-      this.storage.get( this.id + "times" )
-    ]).then(values => {
-      //console.log(values);
-      if ( values[0] != null ) 
-        this.nombresAromas = values[0];
-      if ( values[1] != null ) 
-        this.times = values[1];
-    });
+  send() {
+    console.log("send")
   }
+
 }

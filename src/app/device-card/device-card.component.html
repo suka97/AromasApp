@@ -1,4 +1,8 @@
-<ion-card>
+<ion-card disabled="{{!connected}}">
+  <ion-card-header>
+    <ion-card-title>{{device.name}}</ion-card-title>
+  </ion-card-header>
+
   <ion-card-content>
     <ion-grid>
 
@@ -6,11 +10,17 @@
         <ion-col>
           <ion-item>
             <ion-checkbox slot="start"></ion-checkbox>
-            <ion-label>{{nombresAromas[rowNumber]}}</ion-label>
+            <ion-label>{{device.aromasNames[rowNumber]}}</ion-label>
           </ion-item>
         </ion-col>
         <ion-col>
+          <!--
           <ion-input type="number" placeholder="{{times[rowNumber]}}" [(ngModel)]="times[rowNumber]"></ion-input>
+          -->
+          <ion-item>
+            <ion-range min="100" max="3000" step="100" [(ngModel)]="times[rowNumber]">
+            </ion-range>
+          </ion-item>
         </ion-col>
       </ion-row>
 
