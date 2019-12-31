@@ -28,6 +28,7 @@
     "@ionic/angular": "^4.7.1",
     "@ionic/storage": "^2.2.0",
     "cordova-android": "8.0.0",
+    "cordova-browser": "^6.0.0",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-plugin-dialogs": "^2.0.2",
     "core-js": "^2.5.4",
@@ -85,7 +86,8 @@
       "cordova-plugin-android-permissions": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

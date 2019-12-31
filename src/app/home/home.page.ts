@@ -5,6 +5,7 @@ import { TimeInterval } from 'rxjs';
 import { DeviceCardComponent } from '../../app/device-card/device-card.component';
 import { setIndex } from '@ionic-native/core/decorators/common';
 import { DeviceType } from '../device.type'
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { ConnectPage } from '../connect/connect.page';
 
@@ -16,7 +17,7 @@ import { ConnectPage } from '../connect/connect.page';
 export class HomePage implements AfterViewInit {
 
   constructor(private storage: Storage, public toastController: ToastController, private events: Events, 
-      public loadingController: LoadingController, public navCtrl: NavController) {   }
+      public loadingController: LoadingController, public navCtrl: NavController, private splashScreen: SplashScreen) {   }
 
   @ViewChildren(DeviceCardComponent) devicesArray !: QueryList<DeviceCardComponent>
   indexes: number[];
@@ -93,9 +94,12 @@ export class HomePage implements AfterViewInit {
   */
 
   send() {
+    /*
     this.devicesArray.forEach( device=> {
       device.send();
     });
+    */
+   this.splashScreen.show();
   }
 
 }
