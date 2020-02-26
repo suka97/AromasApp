@@ -9,17 +9,16 @@
       <ion-row nowrap *ngFor="let rowNumber of rows">
         <ion-col>
           <ion-item>
-            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-checkbox slot="start" [(ngModel)]="rowEnabled[rowNumber]"></ion-checkbox>
             <ion-label>{{device.aromasNames[rowNumber]}}</ion-label>
           </ion-item>
         </ion-col>
-        <ion-col>
-          <!--
-          <ion-input type="number" placeholder="{{times[rowNumber]}}" [(ngModel)]="times[rowNumber]"></ion-input>
-          -->
+        <ion-col>          
           <ion-item>
-            <ion-range min="100" max="3000" step="100" [(ngModel)]="times[rowNumber]">
-            </ion-range>
+            <!--
+            <ion-input type="number" placeholder="{{times[rowNumber]}}" [(ngModel)]="times[rowNumber]"></ion-input>
+            -->
+            <ion-range min="100" max="3000" step="100" [(ngModel)]="times[rowNumber]"></ion-range>            
           </ion-item>
         </ion-col>
       </ion-row>

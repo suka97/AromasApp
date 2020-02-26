@@ -25,6 +25,7 @@ export class HomePage implements AfterViewInit {
   connected: boolean = false;
   connectBtn_text: string = "CONECTAR";
   connectBtn_color: string = "primary";
+  isLoading: boolean = false;
 
   ngAfterViewInit() {
     this.events.subscribe("settings-event", (values)=>{
@@ -44,23 +45,55 @@ export class HomePage implements AfterViewInit {
     });
   }
 
-  connect() { 
-    console.log("connect");
-    this.devicesArray.forEach( device=> {
-      device.connect();
-    });
-    this.connected = !this.connected;
-    if ( this.connected ) {
-      this.connectBtn_text = "DESCONECTAR";
-      this.connectBtn_color = "danger"
+  connectClicked() { 
+    if ( !this.connected ) {
+      this.presentLoading("Conectando", 10000);
+      this.devicesArray.forEach( device=> {
+        device.connect().then(() => { 
+          // si no se conecto es que hubo un error y corto todo
+          if ( !device.connected ) {
+            this.dismissLoading();
+            this.toast( "[" + device.device.name + "] " + "Error de coneccion " );
+          }
+          // en la desconeccion de este dispositivo
+          device.connection.onclose = (e)=>{
+            this.disconnectDevices();
+            console.log( "[" + device.device.name + "]: " + "Disconnected" );
+          };
+          // reviso si estan todos ya conectados para ver si saco el toast
+          let allConnected = true;
+          this.devicesArray.forEach( device=> {
+            if (!device.connected) allConnected = false;
+          });
+          if (allConnected) {
+            this.toast("Dispositivos conectados");
+            this.dismissLoading();
+            this.connected = true;
+            this.connectBtn_text = "DESCONEC";
+            this.connectBtn_color = "danger"
+          }
+        });
+      });
     }
-    else {
+    else
+      this.disconnectDevices();
+  }
+
+  disconnectDevices() {
+    if ( this.connected ) {
+      this.connected = false;
+      this.devicesArray.forEach( device=> {
+        device.disconnect();
+      });
+      // cambio los colores y texto del boton
       this.connectBtn_text = "CONECTAR";
-      this.connectBtn_color = "primary"
+      this.connectBtn_color = "primary";
+      this.toast("Dispositivos desconectados");
     }
   }
 
   settings() {
+    this.disconnectDevices();
     this.navCtrl.navigateForward("settings");
   }
 
@@ -72,7 +105,7 @@ export class HomePage implements AfterViewInit {
     toast.present();
   }
 
-  /*
+
   async presentLoading(message: string, duration: number = 30000) {
     this.isLoading = true;
     return await this.loadingController.create({
@@ -82,24 +115,27 @@ export class HomePage implements AfterViewInit {
       a.present().then(() => {
         //console.log('presented');
         if (!this.isLoading) {
-          a.dismiss().then(() => console.log('abort presenting'));
+          a.dismiss()/*.then(() => console.log('abort presenting'))*/;
         }
       });
     });
   }
   async dismissLoading() {
     this.isLoading = false;
-    return await this.loadingController.dismiss().then(() => console.log('dismissed'));
+    return await this.loadingController.dismiss()/*.then(() => console.log('dismissed'))*/;
   }
-  */
+  
 
   send() {
-    /*
     this.devicesArray.forEach( device=> {
       device.send();
     });
-    */
-   this.splashScreen.show();
+  }
+
+  onConnectionError(deviceName: string) {
+    console.log( "[" + deviceName + "] " + "Connection error" );
+    this.disconnectDevices();
+    this.toast( "[" + deviceName + "] " + "Error de coneccion " );
   }
 
 }

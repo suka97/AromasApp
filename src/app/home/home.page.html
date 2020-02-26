@@ -1,21 +1,32 @@
+<ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button #connectBtn color="{{connectBtn_color}}" strong="true" size="large" expand="block" (click)="connectClicked()">
+          {{connectBtn_text}}
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="warning" expand="block" strong="true" size="large" (click)="settings()">
+          Ajustes
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-row center>
+    <ion-col text-center>
+      <ion-button class=round shape="round" color="success" strong="true" size="large" (click)="send()" disabled="{{!connected}}">
+        Enviar
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-header>
+
 <ion-content>
-
-  <ion-button color="warning" expand="block" (click)="settings()">
-    Ajustes
-  </ion-button>
-
-  <ion-button #connectBtn color="{{connectBtn_color}}" expand="block" (click)="connect()">
-    {{connectBtn_text}}
-  </ion-button>
-
-  <ion-button color="success" expand="block" (click)="send()" disabled="{{!connected}}">
-    Enviar
-  </ion-button>
-
   <ion-list>
     <div *ngFor="let ngFor_index of indexes"  style="font-size:smaller">
-      <app-device-card [device]="devices[ngFor_index]"></app-device-card>
+      <app-device-card [device]="devices[ngFor_index]" (error)="onConnectionError($event)"></app-device-card>
     </div>
   </ion-list>
-  
 </ion-content>

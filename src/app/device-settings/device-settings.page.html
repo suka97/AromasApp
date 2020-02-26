@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Añadir Dispositivo</ion-title>
+    <ion-title>Configurar Dispositivo</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,7 +15,7 @@
   <ion-list>
     <ion-list-header>Direccion IP</ion-list-header>
     <ion-item>
-      <ion-input type="number" placeholder="Ingrese la Direccion IP" [(ngModel)]="device.url"></ion-input>
+      <ion-input type="text" placeholder="Ingrese la Direccion IP" [(ngModel)]="device.url"></ion-input>
     </ion-item>
   </ion-list>
 
@@ -36,7 +36,7 @@
   </ion-list>
 
   <ion-button color="success" expand="block" (click)="addDevice()">
-    AGREGAR
+    {{doneButton_text}}
   </ion-button>
   
 </ion-content>

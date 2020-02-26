@@ -5,10 +5,12 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-button #connectBtn color="danger" expand="block" (click)="addDevice()">
-    Agregar Dispositivo
-  </ion-button>
+  <!--
+  <ion-item>
+    <ion-label position="stacked">Tiempo maximo</ion-label>
+    <ion-input type="number"></ion-input>
+  </ion-item>
+  -->
 
   <ion-list>
     <ion-list-header>
@@ -28,5 +30,9 @@
       </ion-item-sliding>
     </div>
   </ion-list>
+
+  <ion-button #connectBtn color="danger" expand="block" (click)="addDevice()">
+    Agregar Dispositivo
+  </ion-button>
 
 </ion-content>

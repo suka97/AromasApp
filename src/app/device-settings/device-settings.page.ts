@@ -18,6 +18,7 @@ export class DeviceSettingsPage implements OnInit {
   devices: DeviceType[];
   id_fromParent: number;
   modifyingOldDevice: string;
+  doneButton_text: string = "AGREGAR";
 
   constructor(private route: ActivatedRoute, public navCtrl: NavController, private events: Events, private storage: Storage) {
   }
@@ -35,8 +36,10 @@ export class DeviceSettingsPage implements OnInit {
     ]).then(values => {
       this.devices = values[0];
 
-      if ( this.modifyingOldDevice != null )
+      if ( this.modifyingOldDevice != null ) {
         this.device = this.devices[this.id_fromParent];
+        this.doneButton_text = "GUARDAR";   // en vez de "AGREGAR"
+      }
       if ( this.devices == null )
         this.devices = [this.device];
     });
