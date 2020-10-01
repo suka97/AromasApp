@@ -13,11 +13,13 @@
             <ion-label>{{device.aromasNames[rowNumber]}}</ion-label>
           </ion-item>
         </ion-col>
-        <ion-col>          
+        <ion-col *ngIf="timeDisplayMode=='input' || timeDisplayMode=='both'">          
           <ion-item>
-            <!--
-            <ion-input type="number" placeholder="{{times[rowNumber]}}" [(ngModel)]="times[rowNumber]"></ion-input>
-            -->
+            <ion-label>{{times[rowNumber]/1000}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col *ngIf="timeDisplayMode=='range' || timeDisplayMode=='both'">          
+          <ion-item>
             <ion-range min="100" max="3000" step="100" [(ngModel)]="times[rowNumber]"></ion-range>            
           </ion-item>
         </ion-col>

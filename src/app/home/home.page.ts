@@ -9,6 +9,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 import { ConnectPage } from '../connect/connect.page';
 
+import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -26,16 +28,28 @@ export class HomePage implements AfterViewInit {
   connectBtn_text: string = "CONECTAR";
   connectBtn_color: string = "primary";
   isLoading: boolean = false;
+  timeDisplayMode: string;
 
   ngAfterViewInit() {
     this.events.subscribe("settings-event", (values)=>{
-      //console.log("settings-event");
-      this.getDevices();
+      this.getOptions().then(_=> {
+        this.getDevices().then(_=> {  });
+      });
     });
-    this.getDevices().then(_=> {  });
+    this.getOptions().then(_=> {
+      this.getDevices().then(_=> {  });
+    });
   }
 
-  getDevices() {
+  getOptions() {
+    return Promise.all([
+      this.storage.get("timeDisplayMode")
+    ]).then(values => {
+      this.timeDisplayMode = (values[0]!=null) ? values[0] : "range";
+    });
+  }
+
+  getDevices() { 
     return Promise.all([
       this.storage.get("devices")
     ]).then(values => {
@@ -127,7 +141,7 @@ export class HomePage implements AfterViewInit {
   
 
   send() {
-    this.devicesArray.forEach( device=> {
+    this.devicesArray.forEach( device=> { console.log("send");
       device.send();
     });
   }

@@ -12,6 +12,7 @@ import { Storage } from "@ionic/storage";
 export class SettingsPage implements OnInit {
   devices: DeviceType[];
   indexes: number[];
+  showSecondsLabel: boolean = false;
 
   constructor(public navCtrl: NavController, private router: Router, private events: Events, private storage: Storage) { }
 
@@ -22,9 +23,24 @@ export class SettingsPage implements OnInit {
     });
 
     this.updateDevicesList();
+    this.getOptions();
   }
 
-  addDevice() {
+  getOptions() {
+    return Promise.all([
+      this.storage.get("timeDisplayMode")
+    ]).then(values => {
+      this.showSecondsLabel = (values[0]=="both") ? true : false;
+    });
+  }
+
+  showOptChanged() {
+    this.storage.set("timeDisplayMode", (this.showSecondsLabel)?"both":"range").then( values => {
+      this.events.publish("settings-event", { });
+    });
+  }
+
+  addDevice() { 
     let id_toSend = 0;
     if ( this.devices != null )
       id_toSend = this.devices.length;
@@ -41,13 +57,16 @@ export class SettingsPage implements OnInit {
   }
 
   updateDevicesList() {
-    Promise.all([
-      this.storage.get("devices")
-    ]).then(values => {
-      this.devices = values[0];
-      if ( this.devices != null )
-        this.indexes = Array.from(Array(this.devices.length).keys());
-    });
+    // timeout 100ms para que ande bien en android... 
+    setTimeout(()=>{ //console.log("updateDeviceList");
+      Promise.all([
+          this.storage.get("devices")
+        ]).then(values => {
+          this.devices = values[0];
+          if ( this.devices != null )
+            this.indexes = Array.from(Array(this.devices.length).keys());
+        });
+    }, 100);
   }
 
   deleteDevice(deviceIndex: number) {

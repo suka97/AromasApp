@@ -41,7 +41,7 @@ export class DeviceSettingsPage implements OnInit {
         this.doneButton_text = "GUARDAR";   // en vez de "AGREGAR"
       }
       if ( this.devices == null )
-        this.devices = [this.device];
+        this.devices = [];
     });
   }
 
@@ -50,8 +50,9 @@ export class DeviceSettingsPage implements OnInit {
             && this.device.name!="" && this.device.url!="" ) 
     {
       // si estoy creando uno nuevo lo pusheo en el array
-      if ( this.modifyingOldDevice == null )
+      if ( this.modifyingOldDevice == null ) {
         this.devices.push(this.device);
+      }
 
       this.storage.set("devices", this.devices).then( values => {
         // vuelvo y notifico el evento al parent

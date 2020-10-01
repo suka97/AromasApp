@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, AfterViewInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, AfterViewInit, HostListener } from '@angular/core';
 import { DeviceType } from '../device.type';
 
 @Component({
@@ -10,17 +10,29 @@ export class DeviceCardComponent implements AfterViewInit {
 
   constructor() { }
 
-  @Input() device: DeviceType
+  @Input() device: DeviceType;
+  @Input() timeDisplayMode: string;
   @Output() error: EventEmitter<any> = new EventEmitter();
 
+  minNumberWidth: number = 400;
   port: string = "3000";
   rows: number[] = [0, 1, 2, 3];
-  times: string[] = ["500", "500", "500", "500"];
+  times: number[] = [500, 500, 500, 500];
   rowEnabled: boolean[] = [true, true, true, true];
   connected: boolean = false;
   connection: WebSocket;
   waitingResponse: boolean[] = [false, false, false, false];
   timersIds: ReturnType<typeof setTimeout>[] = new Array<ReturnType<typeof setTimeout>>(4); 
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    // // check si da el ancho para ver el tiempo
+    // console.log("width changed to: " + window.innerWidth);
+    // this.showNumberInput = (window.innerWidth > this.minNumberWidth) ? true : false;
+  }
+  
+  ngOnInit() {
+  }
 
   ngAfterViewInit() {
   }
@@ -90,7 +102,7 @@ export class DeviceCardComponent implements AfterViewInit {
         let sendString: string = i + "&" + this.times[i];
         console.log( "["+this.device.name+"] " + sendString );
 
-        this.connection.send(sendString);
+        this.connection.send(sendString); console.log(sendString);
         this.waitingResponse[i] = true;
         // espero respuesta
         this.timersIds[i] = setTimeout(() => {
