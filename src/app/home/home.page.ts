@@ -61,7 +61,7 @@ export class HomePage implements AfterViewInit {
 
   connectClicked() { 
     if ( !this.connected ) {
-      this.presentLoading("Conectando", 10000);
+      this.presentLoading("Conectando", 100000);
       this.devicesArray.forEach( device=> {
         device.connect().then(() => { 
           // si no se conecto es que hubo un error y corto todo

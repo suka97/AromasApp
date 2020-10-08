@@ -91,6 +91,8 @@ export class DeviceCardComponent implements AfterViewInit {
         console.log( "[" + this.device.name + "]: " + "Connection closed" );
         this.connection.close();
       }
+      for( let i=0 ; i<4 ; i++ ) 
+        this.waitingResponse[i] = false;
       this.connected = false;
     }
     return;
