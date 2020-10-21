@@ -42,7 +42,7 @@ export class DeviceCardComponent implements AfterViewInit {
       if ( !this.connected ) {
         this.connection = new WebSocket("ws://" + this.device.url + ":" + this.port + "/");
         this.connection.onerror = (e)=>{
-          console.log( "[" + this.device.name + "]: " + "Connection error" );
+          console.log( "[" + this.device.name + "]: " + "On Connection error" );
           this.error.emit(this.device.name);      // emit por si pasa despues de estar conectado
           resolve();      // resolve por si pasa al tratar de conectarse y falla
         };
@@ -66,18 +66,22 @@ export class DeviceCardComponent implements AfterViewInit {
     let responseSplitted: string[] = response.split("&");
     if ( responseSplitted.length != 2 ) {
       this.error.emit(this.device.name);
+      console.log( "[" + this.device.name + "] " + "responseSplitted Error" );
       return;
     }
 
     let rowNumber: number = parseInt(responseSplitted[0]);
     if ( (rowNumber < 0) || (rowNumber > 3) ) {
       this.error.emit(this.device.name);
+      console.log( "[" + this.device.name + "] " + "rowNumber Error" );
       return;
     }
  
     if ( responseSplitted[1] == "ON" ) {
-      if ( !this.waitingResponse[rowNumber] )
+      if ( !this.waitingResponse[rowNumber] ) {
         this.error.emit(this.device.name);
+        console.log( "[" + this.device.name + "] " + "waiting Response Error" );
+      }
       else {
         this.waitingResponse[rowNumber] = false;
         clearTimeout(this.timersIds[rowNumber]);
@@ -109,7 +113,8 @@ export class DeviceCardComponent implements AfterViewInit {
         // espero respuesta
         this.timersIds[i] = setTimeout(() => {
           this.error.emit(this.device.name);
-        }, 2000);
+          console.log( "[" + this.device.name + "] " + "send timeout Error" );
+        }, 10000);
       }
     }
   }
